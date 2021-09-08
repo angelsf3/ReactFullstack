@@ -6,6 +6,13 @@ function Statistics({ data }) {
     const average = (all > 0) ? (good / all) - (bad / all) : 0
     const positive = (all > 0) ? (good / all) * 100 : 0
 
+    if (all <= 0) {
+        return (
+            <div>
+                <p>No feedback given</p>
+            </div>
+        )
+    }
     return(
         <div>
             <h1>statistics</h1>
