@@ -1,7 +1,7 @@
 function Total(props) {
     return (
         <div>
-            <p>Number of exercises {props.total}</p>
+            <b>total of exercises {props.total}</b>
         </div>
     )
 }
