@@ -4,14 +4,21 @@ import Person from "./person/Person";
 
 function App() {
     const [persons, setPersons] = useState([
-        { name: 'Arto Hellas' }
+        {
+            name: 'Arto Hellas',
+            telephone: '040-1234567'
+        }
     ])
 
     const [newName, setNewName] = useState('')
+    const [newTelephone, setNewTelephone] = useState('')
 
     const addPerson = (event) => {
         event.preventDefault()
-        const person = { name: newName }
+        const person = {
+            name: newName,
+            telephone: newTelephone
+        }
 
         if (!persons.find(p => p.name === person.name))
             setPersons(persons.concat(person))
@@ -20,6 +27,7 @@ function App() {
     }
 
     const handleNameChange = (event) => setNewName(event.target.value)
+    const handleTelephoneChange = (event) => setNewTelephone(event.target.value)
 
     return(
         <div>
@@ -27,6 +35,9 @@ function App() {
             <form onSubmit={addPerson}>
                 <div>
                     name: <input value={newName} onChange={handleNameChange}/>
+                </div>
+                <div>
+                    telephone: <input value={newTelephone} onChange={handleTelephoneChange}/>
                 </div>
                 <div>
                     <button type="submit">add</button>
