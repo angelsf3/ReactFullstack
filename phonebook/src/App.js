@@ -1,6 +1,8 @@
 import './App.css';
 import React, {useState} from "react";
 import Person from "./person/Person";
+import Filter from "./filter/Filter";
+import PersonForm from "./person-form/PersonForm";
 
 function App() {
     const [persons, setPersons] = useState([
@@ -16,6 +18,7 @@ function App() {
     const addPerson = (event) => {
         event.preventDefault()
         const person = {
+            id: persons.length + 1,
             name: newName,
             telephone: newTelephone
         }
@@ -28,27 +31,23 @@ function App() {
 
     const handleNameChange = (event) => setNewName(event.target.value)
     const handleTelephoneChange = (event) => setNewTelephone(event.target.value)
-
     const handlePredicateChange = (event) => setFilter(event.target.value)
+
+    const formProps = {
+        addPerson: addPerson,
+        newName: newName,
+        handleNameChange: handleNameChange,
+        handleTelephoneChange: handleTelephoneChange
+    }
 
     return(
         <div>
             <h2>Phonebook</h2>
-            <div>
-                <input value={filter} onChange={handlePredicateChange}/>
-            </div>
+            <Filter value={filter} onChange={handlePredicateChange}/>
+
             <h2>add a new</h2>
-            <form onSubmit={addPerson}>
-                <div>
-                    name: <input value={newName} onChange={handleNameChange}/>
-                </div>
-                <div>
-                    telephone: <input value={newTelephone} onChange={handleTelephoneChange}/>
-                </div>
-                <div>
-                    <button type="submit">add</button>
-                </div>
-            </form>
+            <PersonForm props={formProps}/>
+
             <h2>Numbers</h2>
             <ul>
                 {persons
